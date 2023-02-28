@@ -22,8 +22,8 @@ class Map():
     def __repr__(self):
         '''Prints the map line by line.'''
         string = ""
-        for i in range(self.size):
-            for j in range(self.size):
+        for i in range(len(self)):
+            for j in range(len(self)):
                 string += self._mat[i][j]
             string += "\n"
 
