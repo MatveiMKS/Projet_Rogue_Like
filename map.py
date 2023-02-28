@@ -11,8 +11,7 @@ class Map():
            'q' : Coord(-1,0)} # class attribute, used to describe the directions
 
     def __init__(self, size = 5, pos = Coord(1,1), hero = "@"):
-        self.size = size
-        self._mat = [[Map.ground for i in range(self.size)] for j in range(self.size)] 
+        self._mat = [[Map.ground for i in range(size)] for j in range(size)] 
         # used to initialize the map with ground cells
         self._elem = {hero : pos} # used to store the elements of the map and their position
         for (key, element) in self._elem.items(): # used to place the elements on the map
@@ -31,13 +30,14 @@ class Map():
         return string
 
     def __len__(self):
-        return self.size
+        return len(self._mat)
 
     def __contains__(self, item):
         '''Returns True if item's coordinates are in the map, or if item is in the map. 
         Returns False otherwise.'''
+        long = len(self)
         if isinstance(item, Coord):
-            return (item.x >= 0 and item.x < self.size) and (item.y >= 0 and item.y < self.size)
+            return (item.x >= 0 and item.x < long) and (item.y >= 0 and item.y < long)
         return item in self._elem
 
     def get(self, coords):
