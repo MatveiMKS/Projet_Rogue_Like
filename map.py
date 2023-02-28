@@ -38,23 +38,20 @@ class Map():
         Returns False otherwise.'''
         if isinstance(item, Coord):
             return (item.x >= 0 and item.x < self.size) and (item.y >= 0 and item.y < self.size)
-        else:
-            return item in self._elem
+        return item in self._elem
 
     def get(self, coords):
         '''Returns the element at the coordinates coords.
         Returns None if coords is not in the map.'''
         if coords in self:
             return self._mat[coords.y][coords.x]
-        else:
-            return None
+        return None
 
     def pos(self, element):
         '''Returns the coordinates of element. Returns None if element is not in the map.'''
         if element in self._elem:
             return self._elem[element]
-        else:
-            return None
+        return None
 
     def put(self, coords, element):
         '''Puts element at the coordinates coords.'''
