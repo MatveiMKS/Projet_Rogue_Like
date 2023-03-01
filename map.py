@@ -74,7 +74,7 @@ class Map():
         if element in self._elem:
             if self.pos(element)+way in self and self.get(self.pos(element)+way) == Map.ground:
                 # if the cell is empty
-                pos_ini= self.pos(element)
+                pos_ini = self.pos(element)
                 self.rm(pos_ini)
                 self.put(pos_ini+way, element)
 
