@@ -13,20 +13,21 @@ class Map():
     def __init__(self, size = 5, pos = Coord(1,1), hero = "@"):
         self._mat = [[Map.ground for i in range(size)] for j in range(size)] 
         # used to initialize the map with ground cells
-        self._elem = {hero : pos} # used to store the elements of the map and their position
-        for (key, element) in self._elem.items(): # used to place the elements on the map
-            pos_x = element.x
-            pos_y = element.y
-            self._mat[pos_y][pos_x] = key
+        self._elem = {hero : pos} # used to store the elements of the map and their positions
+        self._mat[pos.y][pos.x] = hero
+
+        #for (key, element) in self._elem.items(): # used to place the elements on the map
+        #    pos_x = element.x
+        #    pos_y = element.y
+        #    self._mat[pos_y][pos_x] = key
 
     def __repr__(self):
         '''Prints the map line by line.'''
         string = ""
-        for i in range(len(self)):
-            for j in range(len(self)):
-                string += self._mat[i][j]
+        for sub_list in self._mat:
+            for case in sub_list:
+                string += case
             string += "\n"
-
         return string
 
     def __len__(self):
