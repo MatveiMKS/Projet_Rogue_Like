@@ -1,4 +1,11 @@
 # Projet_Rogue_Like
 
 ## Description du projet:
-Dans le cadre de notre premiere annee de Peip a Polytech Nice, nous developpons pour le cours de programmation orientee objet un jeu de type "Roguelike". Celui ci doit etre ecrit entierement en Python et dont princapelement le module tkinter afin de gerer la partie graphique.
+Dans le cadre de notre première année de Peip à Polytech Nice, nous développons pour le cours de programmation orientée objet un jeu de type "Rogue Like". Celui-ci doit être écrit entièrement en Python et dont principalement le module tkinter afin de gérer la partie graphique.
+
+## Membres du groupe:
+
+Matvei Maksimenka @MatveiBG
+Theophile Di Bona @theobilou
+
+Tout deux en G5
