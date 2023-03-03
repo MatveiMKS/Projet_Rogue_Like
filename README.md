@@ -16,4 +16,5 @@ Tout deux en G5
 Le projet est divisé en versions.
 
 Version actuelle: V1
+
 Version finale: V?
