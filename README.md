@@ -5,7 +5,8 @@ Dans le cadre de notre première année de Peip à Polytech Nice, nous développ
 
 ## Membres du groupe:
 
-Matvei Maksimenka @MatveiBG<\n>
+Matvei Maksimenka @MatveiBG
+
 Theophile Di Bona @theobilou
 
 Tout deux en G5
