@@ -7,6 +7,13 @@ Dans le cadre de notre première année de Peip à Polytech Nice, nous développ
 
 Matvei Maksimenka @MatveiBG
 
-Theophile Di Bona @theobilou
+Théophile Di Bona @theobilou
 
 Tout deux en G5
+
+## Structure:
+
+Le projet est divisé en versions.
+
+Version actuelle: V1
+Version finale: V?
