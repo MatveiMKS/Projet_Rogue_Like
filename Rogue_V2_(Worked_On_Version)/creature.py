@@ -15,7 +15,7 @@ class Creature(Element):
     #ISSUE HERE fix here
     def meet(self, hero):
         '''Called when a Creature element meets an element.'''
-        self._hp -= hero.strength
+        self._hp -= hero._strength
         if self._hp <= 0:
             return True
         return False

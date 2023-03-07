@@ -14,3 +14,4 @@ class Hero(Creature):
 
     def description(self):
         return Creature.description(self) + str(self._inventory)
+    
