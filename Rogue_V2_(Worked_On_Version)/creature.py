@@ -12,7 +12,6 @@ class Creature(Element):
     def description(self):
         return super().description() + f"({self._hp})"
 
-    #ISSUE HERE fix here
     def meet(self, hero):
         '''Called when a Creature element meets an element.'''
         self._hp -= hero._strength

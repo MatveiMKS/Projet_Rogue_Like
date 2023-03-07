@@ -1,32 +1,31 @@
 '''This module contains the Map class, used to represent a map.'''
 from utils import getch
 from coord import Coord
+#from element import Element
+#from creature import Creature
+from hero import Hero
 
 class Map():
     '''Used to represent a map.'''
-    ground = "." # class attribute, used to describe an empty cell
+    ground = '.' # class attribute, used to describe an empty cell
     dir = {'z' : Coord(0,-1),
            's' : Coord(0,1),
            'd' : Coord(1,0),
            'q' : Coord(-1,0)} # class attribute, used to describe the directions
 
-    def __init__(self, size = 5, pos = Coord(1,1), hero = "@"):
-        self._mat = [[Map.ground for i in range(size)] for j in range(size)] 
+    def __init__(self, size = 5, pos = Coord(1,1), hero = None):
+        self._mat = [[Map.ground for _ in range(size)] for _ in range(size)]
         # used to initialize the map with ground cells
-        self._elem = {hero : pos} # used to store the elements of the map and their positions
-        self._mat[pos.y][pos.x] = hero
-
-        #for (key, element) in self._elem.items(): # used to place the elements on the map
-        #    pos_x = element.x
-        #    pos_y = element.y
-        #    self._mat[pos_y][pos_x] = key
+        self._hero = hero if hero else Hero()
+        self._elem = {self._hero : pos} # used to store the elements of the map and their positions
+        self._mat[pos.y][pos.x] = self._hero
 
     def __repr__(self):
         '''Prints the map line by line.'''
         string = ""
         for sub_list in self._mat:
             for case in sub_list:
-                string += case
+                string += str(case)
             string += "\n"
         return string
 
@@ -72,11 +71,18 @@ class Map():
     def move(self, element, way):
         '''Moves element in the direction way.'''
         if element in self._elem:
-            if self.pos(element)+way in self and self.get(self.pos(element)+way) == Map.ground:
+            if self.pos(element)+way in self and self.get(self.pos(element) +way) == Map.ground:
                 # if the cell is empty
                 pos_ini = self.pos(element)
                 self.rm(pos_ini)
                 self.put(pos_ini+way, element)
+            elif self.pos(element)+way in self:
+                # if the cell is not empty
+                met_element = self.get(self.pos(element) +way)
+                if met_element.meet(element):
+                    pos_ini = self.pos(element)
+                    self.rm(pos_ini + way)
+
 
     def __getitem__(self, key):
         '''Returns the element at the coordinates key or the coordinates of the element key.'''
@@ -95,8 +101,12 @@ class Map():
                 self.rm(pos_ini)
                 self.put(value, key)
 
-    def play(self, hero='@'):
+    def play(self):
         '''Plays the game.'''
-        while True:
+        print("--- Welcome Hero! ---")
+        while self._hero._hp > 0:
+            print()
             print(self)
-            self.move(hero, Map.dir[getch()])
+            print(self._hero.description())
+            self.move(self._hero, Map.dir[getch()])
+        print("--- Game Over ---")
