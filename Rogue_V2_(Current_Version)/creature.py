@@ -5,7 +5,7 @@ from element import Element
 class Creature(Element):
     '''This class represents a creature in the game.'''
     def __init__(self, name, hp, abbrv = None, strength = 1):
-        Element.__init__(self, name, abbrv)
+        super().__init__(name, abbrv)
         self._hp= hp
         self._strength = strength
 
