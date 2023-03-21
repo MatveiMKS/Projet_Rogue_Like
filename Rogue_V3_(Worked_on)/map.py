@@ -8,17 +8,20 @@ from hero import Hero
 class Map():
     '''Used to represent a map.'''
     ground = '.' # class attribute, used to describe an empty cell
+    empty = '' # class attribute, used to describe an empty cell
     dir = {'z' : Coord(0,-1),
            's' : Coord(0,1),
            'd' : Coord(1,0),
            'q' : Coord(-1,0)} # class attribute, used to describe the directions
 
-    def __init__(self, size = 5, pos = Coord(1,1), hero = None):
-        self._mat = [[Map.ground for _ in range(size)] for _ in range(size)]
+    def __init__(self, size = 20, pos = Coord(1,1), hero = None):
+        self._mat = [[Map.empty for _ in range(size)] for _ in range(size)]
         # used to initialize the map with ground cells
         self._hero = hero if hero else Hero()
         self._elem = {self._hero : pos} # used to store the elements of the map and their positions
         self._mat[pos.y][pos.x] = self._hero
+        self._roomsToReach = []
+        self._rooms = []
 
     def __repr__(self):
         '''Prints the map line by line.'''
