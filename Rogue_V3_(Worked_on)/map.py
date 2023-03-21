@@ -8,7 +8,7 @@ from hero import Hero
 class Map():
     '''Used to represent a map.'''
     ground = '.' # class attribute, used to describe an empty cell
-    empty = '' # class attribute, used to describe an empty cell
+    empty = ' ' # class attribute, used to describe an empty cell
     dir = {'z' : Coord(0,-1),
            's' : Coord(0,1),
            'd' : Coord(1,0),
@@ -19,7 +19,7 @@ class Map():
         # used to initialize the map with ground cells
         self._hero = hero if hero else Hero()
         self._elem = {self._hero : pos} # used to store the elements of the map and their positions
-        self._mat[pos.y][pos.x] = self._hero
+        #self._mat[pos.y][pos.x] = self._hero
         self._roomsToReach = []
         self._rooms = []
 
@@ -103,6 +103,13 @@ class Map():
                 pos_ini = self.pos(key)
                 self.rm(pos_ini)
                 self.put(value, key)
+
+    def addRoom(self, room):
+        '''Adds a room to the map.'''
+        self._roomsToReach.append(room)
+        for i in range(room.c1.x, room.c2.x+1):
+            for j in range(room.c1.y, room.c2.y+1):
+                self._mat[j][i] = Map.ground
 
     def play(self):
         '''Plays the game.'''
