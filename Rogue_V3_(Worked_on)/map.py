@@ -5,6 +5,8 @@ from coord import Coord
 #from creature import Creature
 from hero import Hero
 
+from random import randint, choice
+
 class Map():
     '''Used to represent a map.'''
     ground = '.' # class attribute, used to describe an empty cell
@@ -110,6 +112,69 @@ class Map():
         for i in range(room.c1.x, room.c2.x+1):
             for j in range(room.c1.y, room.c2.y+1):
                 self._mat[j][i] = Map.ground
+
+    def findRoom(self, coord):
+        '''Returns the room at the coordinates coord.'''
+        for room in self._roomsToReach:
+            if coord in room:
+                return room
+        return False
+
+    def intersectNone(self, room):
+        '''Returns True if the room doesn't intersect with any other room.
+        Returns False otherwise.'''
+        for otherRoom in self._roomsToReach:
+            if room.intersect(otherRoom):
+                return False
+        return True
+
+    def dig(self, coord):
+        '''Dig the ground at the coordinates coord.
+        And if the ground is a room, it is removed from the list of rooms to reach.'''
+        self._mat[coord.y][coord.x] = Map.ground
+        room = self.findRoom(coord)
+        if room:
+            self._roomsToReach.remove(room)
+            self._rooms.append(room)
+
+    def corridor(self, start : Coord, end : Coord):
+        '''Creates a corridor between the coordinates start and end.'''
+        dir_x = 1 if end.x > start.x else -1
+        dir_y = 1 if end.y > start.y else -1
+
+        for i in range(start.y, end.y+dir_y, dir_y):
+            self.dig(Coord(start.x, i))
+        for i in range(start.x, end.x+dir_x, dir_x):
+            self.dig(Coord(i, end.y))
+
+    def reach(self):
+        '''Creates a corridor between a random room and a random room to reach.'''
+        if self._rooms and self._roomsToReach:
+            room_ini = choice(self._rooms)
+            room_fin = choice(self._roomsToReach)
+            self.corridor(room_ini.center(), room_fin.center())
+            return True
+        return False
+
+    def reachAllRooms(self):
+        '''Creates a corridor between all the rooms and all the rooms to reach.'''
+        if self._roomsToReach:
+            self._rooms.append(self._roomsToReach.pop(0))
+            while self.reach():
+                pass
+            return True
+        return False
+    
+    def randRoom(self):
+        '''Returns a random room to the map.
+        With a size between 3 and 8.'''
+        width = randint(3, 8)
+        height = randint(3, 8)
+        x = randint(0, len(self)-width)
+        y = randint(0, len(self)-height)
+        salle = Room(Coord(x, y), Coord(x+width, y+height))
+        self.addRoom(salle)
+
 
     def play(self):
         '''Plays the game.'''
