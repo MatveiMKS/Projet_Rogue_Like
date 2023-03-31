@@ -1,11 +1,10 @@
 '''This module contains the Map class, used to represent a map.'''
+import random
+
 from utils import getch
 from coord import Coord
-#from element import Element
-#from creature import Creature
 from hero import Hero
-
-from random import randint, choice
+from room import Room
 
 class Map():
     '''Used to represent a map.'''
@@ -123,8 +122,8 @@ class Map():
     def intersectNone(self, room):
         '''Returns True if the room doesn't intersect with any other room.
         Returns False otherwise.'''
-        for otherRoom in self._roomsToReach:
-            if room.intersect(otherRoom):
+        for other_room in self._roomsToReach:
+            if room.intersect(other_room):
                 return False
         return True
 
@@ -150,8 +149,8 @@ class Map():
     def reach(self):
         '''Creates a corridor between a random room and a random room to reach.'''
         if self._rooms and self._roomsToReach:
-            room_ini = choice(self._rooms)
-            room_fin = choice(self._roomsToReach)
+            room_ini = random.choice(self._rooms)
+            room_fin = random.choice(self._roomsToReach)
             self.corridor(room_ini.center(), room_fin.center())
             return True
         return False
@@ -164,16 +163,25 @@ class Map():
                 pass
             return True
         return False
-    
+
     def randRoom(self):
         '''Returns a random room to the map.
         With a size between 3 and 8.'''
-        width = randint(3, 8)
-        height = randint(3, 8)
-        x = randint(0, len(self)-width)
-        y = randint(0, len(self)-height)
-        salle = Room(Coord(x, y), Coord(x+width, y+height))
+        x_1 = random.randint(0, len(self)-3)
+        y_1 = random.randint(0, len(self)-3)
+
+        x_2 = min(len(self)-1, x_1 + random.randint(3, 8))
+        y_2 = min(len(self)-1, y_1 + random.randint(3, 8))
+        salle = Room(Coord(x_1, y_1), Coord(x_2, y_2))
         self.addRoom(salle)
+        return salle
+
+    def generateRooms(self, nbRooms):
+        '''Generates nbRooms rooms to the map.'''
+        for _ in range(nbRooms):
+            salle = self.randRoom()
+            if self.intersectNone(salle):
+                self.addRoom(salle)
 
 
     def play(self):

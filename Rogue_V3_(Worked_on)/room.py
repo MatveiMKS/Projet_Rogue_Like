@@ -22,5 +22,23 @@ class Room():
 
     def intersect(self, other):
         '''Returns True if self intersects other, False otherwise.'''
-        return (self.c1.x <= other.c2.x and self.c2.x >= other.c1.x
-                and self.c1.y <= other.c2.y and self.c2.y >= other.c1.y)
+        y_self_bas = min(self.c1.y, self.c2.y)
+        y_self_haut = max(self.c1.y, self.c2.y)
+
+        x_self_gauche = min(self.c1.x, self.c2.x)
+        x_self_droite = max(self.c1.x, self.c2.x)
+
+        y_other_bas = min(other.c1.y, other.c2.y)
+        y_other_haut = max(other.c1.y, other.c2.y)
+
+        x_other_gauche = min(other.c1.x, other.c2.x)
+        x_other_droite = max(other.c1.x, other.c2.x)
+
+        if (y_self_bas > y_other_haut or y_self_haut < y_other_bas):
+            #si le self est en dessous de other ou au dessus de other
+            return False
+
+        if (x_self_gauche > x_other_droite or x_self_droite < x_other_gauche):
+            #si le self est à droite de other ou à gauche de other
+            return False
+        return True
