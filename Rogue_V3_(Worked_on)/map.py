@@ -15,14 +15,21 @@ class Map():
            'd' : Coord(1,0),
            'q' : Coord(-1,0)} # class attribute, used to describe the directions
 
-    def __init__(self, size = 20, pos = Coord(1,1), hero = None):
+    def __init__(self, size = 20, hero = None, nbrooms = 7):
         self._mat = [[Map.empty for _ in range(size)] for _ in range(size)]
         # used to initialize the map with ground cells
+
         self._hero = hero if hero else Hero()
-        self._elem = {self._hero : pos} # used to store the elements of the map and their positions
-        #self._mat[pos.y][pos.x] = self._hero
+        self._elem = {} # used to store the elements of the map and their positions
         self._roomsToReach = []
         self._rooms = []
+        self.generateRooms(nbrooms)
+        self.reachAllRooms()
+
+        salle1 = self._rooms[0] # put the hero in the first room
+        centre_sal1 = salle1.center()
+        self._mat[centre_sal1.y][centre_sal1.x] = self._hero
+        self._elem[self._hero] = centre_sal1
 
     def __repr__(self):
         '''Prints the map line by line.'''
