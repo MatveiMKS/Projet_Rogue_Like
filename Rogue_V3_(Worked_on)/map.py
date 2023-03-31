@@ -87,7 +87,7 @@ class Map():
                 pos_ini = self.pos(element)
                 self.rm(pos_ini)
                 self.put(pos_ini+way, element)
-            elif self.pos(element)+way in self:
+            elif self.pos(element)+way and self.get(self.pos(element) +way) != Map.empty:
                 # if the cell is not empty
                 met_element = self.get(self.pos(element) +way)
                 if met_element.meet(element):
@@ -189,6 +189,16 @@ class Map():
             salle = self.randRoom()
             if self.intersectNone(salle):
                 self.addRoom(salle)
+
+
+    def fill_map(self, elements, nb_elements):
+        '''Puts nb_elements elements of the list elements in the map.'''
+        for _ in range(nb_elements):
+            room = random.choice(self._rooms)
+            pos = room.random_pos()
+            if pos != self._rooms[0].center():
+                element = random.choice(elements)
+                self[pos] = element
 
 
     def play(self):

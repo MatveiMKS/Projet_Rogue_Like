@@ -1,5 +1,6 @@
 '''This module contains the Room class.'''''
 from coord import Coord
+import random
 
 class Room():
     '''A room in the dungeon.'''
@@ -42,3 +43,9 @@ class Room():
             #si le self est à droite de other ou à gauche de other
             return False
         return True
+
+    def random_pos(self):
+        '''Returns a random position in the room.'''
+        pos_x = random.randint(self.c1.x, self.c2.x)
+        pos_y = random.randint(self.c1.y, self.c2.y)
+        return Coord(pos_x, pos_y)
