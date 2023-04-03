@@ -1,6 +1,6 @@
 '''This module contains the Hero class.'''
 
-from creature import Creature
+from .creature import Creature
 
 class Hero(Creature):
     '''This class represents the hero in the game.'''

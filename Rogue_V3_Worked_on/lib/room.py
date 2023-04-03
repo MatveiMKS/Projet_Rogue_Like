@@ -1,6 +1,6 @@
 '''This module contains the Room class.'''''
 import random
-from coord import Coord
+from .coord import Coord
 
 class Room():
     '''A room in the dungeon.'''

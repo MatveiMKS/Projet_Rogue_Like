@@ -1,19 +1,19 @@
 '''This module contains the Map class, used to represent a map.'''
 import random
 
-from utils import getch
-from coord import Coord
-from hero import Hero
-from room import Room
+from .utils import getch
+from .coord import Coord
+from .hero import Hero
+from .room import Room
 
 class Map():
     '''Used to represent a map.'''
     ground = '.' # class attribute, used to describe an empty cell
     empty = ' ' # class attribute, used to describe an empty cell
-    dir = {'z' : Coord(0,-1),
+    dir = {'w' : Coord(0,-1),
            's' : Coord(0,1),
            'd' : Coord(1,0),
-           'q' : Coord(-1,0)} # class attribute, used to describe the directions
+           'a' : Coord(-1,0)} # class attribute, used to describe the directions
 
     def __init__(self, size = 20, hero = None, nbrooms = 7):
         self._mat = [[Map.empty for _ in range(size)] for _ in range(size)]
