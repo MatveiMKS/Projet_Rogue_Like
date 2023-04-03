@@ -46,6 +46,6 @@ class Room():
 
     def random_pos(self):
         '''Returns a random position in the room.'''
-        pos_x = random.randint(self.c1.x, self.c2.x)
-        pos_y = random.randint(self.c1.y, self.c2.y)
+        pos_x = random.randint(min(self.c1.x, self.c2.x), max(self.c1.x, self.c2.x))
+        pos_y = random.randint(min(self.c1.y, self.c2.y), max(self.c1.y, self.c2.y))
         return Coord(pos_x, pos_y)
