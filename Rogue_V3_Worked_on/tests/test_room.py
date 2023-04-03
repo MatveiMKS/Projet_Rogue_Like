@@ -121,4 +121,14 @@ def test_intersect():
 
     c19 = Coord(1, 2)
     c20 = Coord(2, -8)
-    
+    room10 = Room(c19, c20)
+    # Tests the case where room 9 overlaps room 8 but the centers are outside.
+    assert room8.intersect(room10)
+    assert room10.intersect(room8)
+
+    c21 = Coord(1, -1)
+    c22 = Coord(2, -2)
+    room11 = Room(c21, c22)
+    # Tests the case where room 11 is entirely below room 8.
+    assert not room8.intersect(room11)
+    assert not room11.intersect(room8)

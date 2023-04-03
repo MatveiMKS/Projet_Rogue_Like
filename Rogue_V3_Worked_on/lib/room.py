@@ -36,11 +36,11 @@ class Room():
         x_other_droite = max(other.c1.x, other.c2.x)
 
         if (y_self_bas > y_other_haut or y_self_haut < y_other_bas):
-            #si le self est en dessous de other ou au dessus de other
+            #if self is below other or self is above other
             return False
 
         if (x_self_gauche > x_other_droite or x_self_droite < x_other_gauche):
-            #si le self est à droite de other ou à gauche de other
+            #if self is to the right of other or self is to the left of other
             return False
         return True
 
