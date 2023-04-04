@@ -87,7 +87,7 @@ class Map():
                 pos_ini = self.pos(element)
                 self.rm(pos_ini)
                 self.put(pos_ini+way, element)
-            elif self.pos(element)+way and self.get(self.pos(element) +way) != Map.empty:
+            elif (self.pos(element)+way) in self and self.get(self.pos(element) +way) != Map.empty:
                 # if the cell is not empty
                 met_element = self.get(self.pos(element) +way)
                 if met_element.meet(element):
