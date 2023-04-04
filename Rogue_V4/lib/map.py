@@ -5,6 +5,7 @@ from .utils import getch
 from .coord import Coord
 from .hero import Hero
 from .room import Room
+from .element import Element
 
 class Map():
     '''Used to represent a map.'''
@@ -51,9 +52,25 @@ class Map():
             return (item.x >= 0 and item.x < long) and (item.y >= 0 and item.y < long)
         return item in self._elem
 
+    def checkCoord(self, coords):
+        '''Raises a TypeError if coords is not a Coord object 
+        or an IndexError if coords is not in the map.'''
+        if not isinstance(coords, Coord):
+            raise TypeError("coords must be a Coord object")
+        if coords not in self:
+            raise IndexError("coords must be in the map")
+
+    def checkElement(self, element):
+        '''Raises a TypeError if element is not an Element object 
+        or a KeyError if element is not in the map.'''
+        if not isinstance(element, Element):
+            raise TypeError("element must be an Element object")
+
     def get(self, coords):
         '''Returns the element at the coordinates coords.
         Returns None if coords is not in the map.'''
+        self.checkCoord(coords)
+
         if coords in self:
             return self._mat[coords.y][coords.x]
         return None
@@ -66,12 +83,20 @@ class Map():
 
     def put(self, coords, element):
         '''Puts element at the coordinates coords.'''
+        self.checkCoord(coords)
+        self.checkElement(element)
+        if self.get(coords) != Map.ground:
+            raise ValueError("coords must be empty")
+        if element in self._elem:
+            raise KeyError("element must not be in the map")
+
         if coords in self:
             self._mat[coords.y][coords.x] = element
             self._elem[element] = coords
 
     def rm(self, coords):
         '''Removes the element at the coordinates coords.'''
+        self.checkCoord(coords)
         if coords in self:
             self._mat[coords.y][coords.x] = Map.ground
             for key, element in self._elem.items():
