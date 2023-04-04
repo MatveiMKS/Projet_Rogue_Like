@@ -204,7 +204,7 @@ class Map():
     def play(self):
         '''Plays the game.'''
         print("--- Welcome Hero! ---")
-        while self._hero._hp > 0:
+        while self._hero.health() > 0:
             print()
             print(self)
             print(self._hero.description())

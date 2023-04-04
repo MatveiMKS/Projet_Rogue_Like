@@ -14,4 +14,7 @@ class Hero(Creature):
 
     def description(self):
         return super().description() + str(self._inventory)
+
+    def health(self):
+        return self._hp
     
