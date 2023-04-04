@@ -16,5 +16,13 @@ class Hero(Creature):
         return super().description() + str(self._inventory)
 
     def health(self):
+        '''Returns the health of the hero.'''
         return self._hp
-    
+
+    def take_dammage(self, dammage):
+        '''Takes dammage.'''
+        self._hp -= dammage
+
+    def dammage(self):
+        '''Returns the dammage of the hero.'''
+        return self._strength
