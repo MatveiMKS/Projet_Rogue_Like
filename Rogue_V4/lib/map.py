@@ -59,6 +59,7 @@ class Map():
             raise TypeError("coords must be a Coord object")
         if coords not in self:
             raise IndexError("coords must be in the map")
+        
 
     def checkElement(self, element):
         '''Raises a TypeError if element is not an Element object 
@@ -70,13 +71,13 @@ class Map():
         '''Returns the element at the coordinates coords.
         Returns None if coords is not in the map.'''
         self.checkCoord(coords)
-
         if coords in self:
             return self._mat[coords.y][coords.x]
         return None
 
     def pos(self, element):
         '''Returns the coordinates of element. Returns None if element is not in the map.'''
+        self.checkElement(element)
         if element in self._elem:
             return self._elem[element]
         return None
@@ -85,7 +86,8 @@ class Map():
         '''Puts element at the coordinates coords.'''
         self.checkCoord(coords)
         self.checkElement(element)
-        if self.get(coords) != Map.ground:
+        
+        if self._mat[coords.y][coords.x] != Map.ground:
             raise ValueError("coords must be empty")
         if element in self._elem:
             raise KeyError("element must not be in the map")
@@ -93,7 +95,7 @@ class Map():
         if coords in self:
             self._mat[coords.y][coords.x] = element
             self._elem[element] = coords
-
+            
     def rm(self, coords):
         '''Removes the element at the coordinates coords.'''
         self.checkCoord(coords)
@@ -214,7 +216,6 @@ class Map():
             if self.intersectNone(salle):
                 self.addRoom(salle)
 
-
     def fill_map(self, elements, nb_elements):
         '''Puts nb_elements elements of the list elements in the map.'''
         for _ in range(nb_elements):
@@ -223,7 +224,6 @@ class Map():
             if pos != self._rooms[0].center():
                 element = random.choice(elements)
                 self[pos] = element
-
 
     def play(self):
         '''Plays the game.'''
@@ -234,3 +234,4 @@ class Map():
             print(self._hero.description())
             self.move(self._hero, Map.dir[getch()])
         print("--- Game Over ---")
+
