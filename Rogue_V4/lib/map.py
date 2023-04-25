@@ -205,7 +205,6 @@ class Map():
         x_2 = min(len(self)-1, x_1 + random.randint(3, 8))
         y_2 = min(len(self)-1, y_1 + random.randint(3, 8))
         salle = Room(Coord(x_1, y_1), Coord(x_2, y_2))
-        self.addRoom(salle)
         return salle
 
     def generateRooms(self, nbRooms):
