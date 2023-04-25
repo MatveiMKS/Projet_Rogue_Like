@@ -1,5 +1,7 @@
 '''This file contains the Element class, which is used to represent an element in the game.'''
 
+import abc
+
 class Element():
     '''This class represents an element in the game.'''
     def __init__(self, name, abbrv = None) -> None:
@@ -14,7 +16,5 @@ class Element():
         return f"<{self._name}>"
 
     def meet(self, hero):
-        '''Called when a Hero element meets an element.'''
-        hero.take(self)
-        return True
-    
+        '''Abstract method called when a Hero element meets an element.'''
+        raise NotImplementedError("Not implemented yet")

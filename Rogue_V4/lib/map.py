@@ -234,4 +234,3 @@ class Map():
             print(self._hero.description())
             self.move(self._hero, Map.dir[getch()])
         print("--- Game Over ---")
-
