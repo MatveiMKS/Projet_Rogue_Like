@@ -1,7 +1,7 @@
 '''This module contains the Hero class.'''
 
 from .creature import Creature
-from .equipement import Equipement
+from .equipment import Equipment
 
 class Hero(Creature):
     '''This class represents the hero in the game.'''
@@ -9,9 +9,9 @@ class Hero(Creature):
         super().__init__(name, hp, abbrv, strength)
         self._inventory = []
 
-    def take(self, item: Equipement):
+    def take(self, item: Equipment):
         '''Adds item to the inventory.'''
-        if not isinstance(item, Equipement):
+        if not isinstance(item, Equipment):
             raise TypeError(f"Can't take {item} as equipement.")
         self._inventory.append(item)
 

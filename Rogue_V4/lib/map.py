@@ -216,15 +216,6 @@ class Map():
             if self.intersectNone(salle):
                 self.addRoom(salle)
 
-    def fill_map(self, elements, nb_elements):
-        '''Puts nb_elements elements of the list elements in the map.'''
-        for _ in range(nb_elements):
-            room = random.choice(self._rooms)
-            pos = room.random_pos()
-            if pos != self._rooms[0].center():
-                element = random.choice(elements)
-                self[pos] = element
-
     def play(self):
         '''Plays the game.'''
         print("--- Welcome Hero! ---")
