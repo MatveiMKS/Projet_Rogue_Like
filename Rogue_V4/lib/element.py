@@ -1,7 +1,5 @@
 '''This file contains the Element class, which is used to represent an element in the game.'''
 
-import abc
-
 class Element():
     '''This class represents an element in the game.'''
     def __init__(self, name, abbrv = None) -> None:
