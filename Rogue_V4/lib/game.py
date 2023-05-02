@@ -1,6 +1,6 @@
 from .hero import Hero
 from .map import Map
-from .creature import Creature
+from . import creature
 from .equipment import Equipment
 import random
 
@@ -10,9 +10,9 @@ class Game():
     equipments = { 0: [ Equipment("potion","!"), Equipment("gold","o") ],
                   1: [ Equipment("sword"), Equipment("bow") ],
                   2: [ Equipment("chainmail") ] }
-    monsters = { 0: [ Creature("Goblin",4), Creature("Bat",2,"W") ],
-                1: [ Creature("Ork",6,strength=2), Creature("Blob",10) ],
-                5: [ Creature("Dragon",20,strength=3) ] }
+    monsters = { 0: [ creature.Creature("Goblin",4), creature.Creature("Bat",2,"W") ],
+                1: [ creature.Creature("Ork",6,strength=2), creature.Creature("Blob",10) ],
+                5: [ creature.Creature("Dragon",20,strength=3) ] }
 
     def __init__(self, hero=None, level=1):
         self._hero = hero if hero else Hero()

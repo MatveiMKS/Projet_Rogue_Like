@@ -2,7 +2,7 @@
 
 class Element():
     '''This class represents an element in the game.'''
-    def __init__(self, name, abbrv = None) -> None:
+    def __init__(self, name, abbrv = "") -> None:
         self._name = name
         self._abbrv = abbrv if abbrv else name[0]
 

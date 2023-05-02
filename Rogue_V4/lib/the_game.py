@@ -1,7 +1,7 @@
 '''File contains theGame function which returns the game singleton.'''
 
-from .game import Game
+from . import game
 
-def theGame(game = Game()):
+def theGame(game = game.Game()):
     '''Returns the game singleton.'''
     return game

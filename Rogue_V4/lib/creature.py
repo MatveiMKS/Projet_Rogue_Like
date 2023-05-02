@@ -1,6 +1,7 @@
 '''This module contains the Creature class.'''
 
 from .element import Element
+from . import the_game
 
 class Creature(Element):
     '''This class represents a creature in the game.'''
@@ -14,7 +15,8 @@ class Creature(Element):
 
     def meet(self, hero):
         '''Called when a Creature element meets an element.'''
-        self._hp -= hero.dammage()
+        self._hp -= hero._strength
+        the_game.theGame().addMessage(f"The {hero._name} hits the {self.description()}")
         if self._hp <= 0:
             return True
         return False
