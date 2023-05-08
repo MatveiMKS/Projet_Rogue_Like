@@ -1,11 +1,11 @@
 ''' Equipement class '''
-from .element import Element
-from .the_game import theGame
+from .element import Element #can stay
+from . import game as gm
 
 class Equipment(Element):
     '''Equipement class, inherits from Element class.'''
     def meet(self, hero):
         '''Called when a Hero element meets an element.'''
         hero.take(self)
-        theGame().addMessage("You pick up a " + self)
+        gm.theGame().addMessage("You pick up a " + self._name)
         return True

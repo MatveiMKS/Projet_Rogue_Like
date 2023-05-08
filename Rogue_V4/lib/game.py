@@ -1,8 +1,12 @@
+'''Contains the Game class, which contains the main game loop and all game logic.
+ Also contains the game singleton function theGame.'''
+
+import random
 from .hero import Hero
 from .map import Map
-from . import creature
+from . import creature as crt
 from .equipment import Equipment
-import random
+
 
 class Game():
     ''' Contains main game loop and all game logic'''
@@ -10,9 +14,9 @@ class Game():
     equipments = { 0: [ Equipment("potion","!"), Equipment("gold","o") ],
                   1: [ Equipment("sword"), Equipment("bow") ],
                   2: [ Equipment("chainmail") ] }
-    monsters = { 0: [ creature.Creature("Goblin",4), creature.Creature("Bat",2,"W") ],
-                1: [ creature.Creature("Ork",6,strength=2), creature.Creature("Blob",10) ],
-                5: [ creature.Creature("Dragon",20,strength=3) ] }
+    monsters = { 0: [ crt.Creature("Goblin",4), crt.Creature("Bat",2,"W") ],
+                1: [ crt.Creature("Ork",6,strength=2), crt.Creature("Blob",10) ],
+                5: [ crt.Creature("Dragon",20,strength=3) ] }
 
     def __init__(self, hero=None, level=1):
         self._hero = hero if hero else Hero()
@@ -56,4 +60,8 @@ class Game():
     def randEquipment(self):
         '''Returns a random equipment.'''
         return self.randElement(Game.equipments)
+
+def theGame(game = Game()):
+    '''Returns the game singleton.'''
+    return game
         

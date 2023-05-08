@@ -1,26 +1,26 @@
 '''Main module of the game. It creates the map and starts the game.'''
 
-from lib.creature import Creature
-from lib.hero import Hero
 from lib.element import Element
-from lib.equipment import Equipment
-from lib import the_game
-import random
+import lib.game
+import lib.creature
+import lib.hero
+import lib.equipment
+
 
 if __name__ == "__main__":
 
     #test d'appel de checkCoord/CheckElement dans les méthodes
 
-    Equipment("sword").meet(the_game.theGame()._hero)
-    print(the_game.theGame().readMessages())
+    lib.equipment.Equipment("sword").meet(lib.game.theGame()._hero)
+    print(lib.game.theGame().readMessages())
 
     try:
-        Element("water").meet(Hero())
+        Element("water").meet(lib.hero.Hero())
     except NotImplementedError:
         print("Test passed")
 
-    the_game.theGame().hero = Hero()
-    Creature("Goblin", 5).meet(the_game.theGame()._hero)
-    print(the_game.theGame().readMessages())
-    the_game.theGame()._hero.meet(Creature("Orc", 10))
-    print(the_game.theGame().readMessages())
+    lib.game.theGame().hero = lib.hero.Hero()
+    lib.creature.Creature("Goblin", 5).meet(lib.game.theGame()._hero)
+    print(lib.game.theGame().readMessages())
+    lib.game.theGame()._hero.meet(lib.creature.Creature("Orc", 10))
+    print(lib.game.theGame().readMessages())
