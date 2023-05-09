@@ -1,9 +1,9 @@
 '''This module contains the Hero class.'''
 
-from .creature import Creature
+from . import creature as cr
 from .equipment import Equipment
 
-class Hero(Creature):
+class Hero(cr.Creature):
     '''This class represents the hero in the game.'''
     def __init__(self, name = 'Hero', hp = 10, abbrv = '@', strength = 2):
         super().__init__(name, hp, abbrv, strength)

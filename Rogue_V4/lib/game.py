@@ -2,8 +2,9 @@
  Also contains the game singleton function theGame.'''
 
 import random
-from .hero import Hero
-from .map import Map
+import copy
+from . import hero as hr
+from . import map as mp
 from . import creature as crt
 from .equipment import Equipment
 
@@ -19,14 +20,14 @@ class Game():
                 5: [ crt.Creature("Dragon",20,strength=3) ] }
 
     def __init__(self, hero=None, level=1):
-        self._hero = hero if hero else Hero()
+        self._hero = hero if hero else hr.Hero()
         self._level = level
         self._floor = None
         self._messages = []
 
     def buildFloor(self):
         '''Builds a new floor.'''
-        self._floor = Map()
+        self._floor = mp.Map()
 
     def addMessage(self, message):
         '''Adds a message to the message list.'''
@@ -51,7 +52,7 @@ class Game():
                 liste_pg_deg = collection[liste]
             else:
                 break
-        return random.choice(liste_pg_deg)
+        return copy.copy(random.choice(liste_pg_deg))
 
     def randMonster(self):
         '''Returns a random monster.'''

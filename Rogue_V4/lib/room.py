@@ -1,6 +1,8 @@
 '''This module contains the Room class.'''''
 import random #can stay
 from .coord import Coord #can stay
+from . import the_game
+from . import map as mp
 
 class Room():
     '''A room in the dungeon.'''
@@ -44,8 +46,20 @@ class Room():
             return False
         return True
 
-    def random_pos(self):
+    def randCoord(self):
         '''Returns a random position in the room.'''
         pos_x = random.randint(min(self.c1.x, self.c2.x), max(self.c1.x, self.c2.x))
         pos_y = random.randint(min(self.c1.y, self.c2.y), max(self.c1.y, self.c2.y))
         return Coord(pos_x, pos_y)
+
+    def randEmptyCoord(self, map):
+        """A random coordinate inside the room which is free on the map."""
+        c = self.randCoord()
+        while map.get(c) != mp.Map.ground or c == self.center():
+            c = self.randCoord()
+        return c
+
+    def decorate(self, map):
+        """Decorates the room by adding a random equipment and monster."""
+        map.put(self.randEmptyCoord(map), the_game.theGame().randEquipment())
+        map.put(self.randEmptyCoord(map), the_game.theGame().randMonster())

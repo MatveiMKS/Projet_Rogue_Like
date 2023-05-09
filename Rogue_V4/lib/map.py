@@ -3,7 +3,7 @@ import random
 
 from .utils import getch
 from .coord import Coord
-from .hero import Hero
+from . import hero as hr
 from .room import Room
 from .element import Element
 
@@ -20,7 +20,7 @@ class Map():
         self._mat = [[Map.empty for _ in range(size)] for _ in range(size)]
         # used to initialize the map with ground cells
 
-        self._hero = hero if hero else Hero()
+        self._hero = hero if hero else hr.Hero()
         self._elem = {} # used to store the elements of the map and their positions
         self._roomsToReach = []
         self._rooms = []
@@ -31,6 +31,8 @@ class Map():
         centre_sal1 = salle1.center()
         self._mat[centre_sal1.y][centre_sal1.x] = self._hero
         self._elem[self._hero] = centre_sal1
+        for r in self._rooms:
+            r.decorate(self)
 
     def __repr__(self):
         '''Prints the map line by line.'''
@@ -59,7 +61,6 @@ class Map():
             raise TypeError("coords must be a Coord object")
         if coords not in self:
             raise IndexError("coords must be in the map")
-        
 
     def checkElement(self, element):
         '''Raises a TypeError if element is not an Element object 
@@ -86,7 +87,7 @@ class Map():
         '''Puts element at the coordinates coords.'''
         self.checkCoord(coords)
         self.checkElement(element)
-        
+
         if self._mat[coords.y][coords.x] != Map.ground:
             raise ValueError("coords must be empty")
         if element in self._elem:
@@ -95,7 +96,7 @@ class Map():
         if coords in self:
             self._mat[coords.y][coords.x] = element
             self._elem[element] = coords
-            
+
     def rm(self, coords):
         '''Removes the element at the coordinates coords.'''
         self.checkCoord(coords)
