@@ -1,7 +1,7 @@
 '''This module contains the Creature class.'''
 
 from .element import Element #can stay
-from . import game as gm
+from . import the_game as gm
 
 class Creature(Element):
     '''This class represents a creature in the game.'''

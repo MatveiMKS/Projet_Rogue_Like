@@ -60,8 +60,4 @@ class Game():
     def randEquipment(self):
         '''Returns a random equipment.'''
         return self.randElement(Game.equipments)
-
-def theGame(game = Game()):
-    '''Returns the game singleton.'''
-    return game
         

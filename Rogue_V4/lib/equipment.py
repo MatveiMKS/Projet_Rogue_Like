@@ -1,6 +1,6 @@
 ''' Equipement class '''
 from .element import Element #can stay
-from . import game as gm
+from . import the_game as gm
 
 class Equipment(Element):
     '''Equipement class, inherits from Element class.'''
