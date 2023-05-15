@@ -1,11 +1,12 @@
 '''Main module of the game. It creates the map and starts the game.'''
 
 import random
-from lib.map import Map
+from map import Map
+import the_game
 
 if __name__ == "__main__":
     random.seed(2)
     print("#####################")
-    m = Map()
-    print(m)
-    print(m._elem)
+    g = the_game.theGame()
+    g.buildFloor()
+    Map.play(g._floor)

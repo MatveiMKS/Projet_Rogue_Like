@@ -1,7 +1,7 @@
 '''This module contains the Room class.'''''
 import random #can stay
-from .coord import Coord #can stay
-from . import the_game
+from coord import Coord #can stay
+import the_game
 
 class Room():
     '''A room in the dungeon.'''

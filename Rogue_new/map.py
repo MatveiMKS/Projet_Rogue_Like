@@ -1,11 +1,11 @@
 '''This module contains the Map class, used to represent a map.'''
 import random
 
-from .utils import getch
-from .coord import Coord
-from .hero import Hero
-from .room import Room
-from .element import Element
+from utils import getch
+from coord import Coord
+from hero import Hero
+from room import Room
+from element import Element
 
 class Map():
     '''Used to represent a map.'''

@@ -4,11 +4,11 @@
 import random
 import copy
 
-from lib.creature import Creature
+from creature import Creature
 
-from .hero import Hero
-from . import map as mp
-from .equipment import Equipment
+from hero import Hero
+import map as mp
+from equipment import Equipment
 
 
 class Game():
