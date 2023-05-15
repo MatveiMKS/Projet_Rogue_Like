@@ -3,9 +3,11 @@
 
 import random
 import copy
-from . import hero as hr
+
+from lib.creature import Creature
+
+from .hero import Hero
 from . import map as mp
-from . import creature as crt
 from .equipment import Equipment
 
 
@@ -15,12 +17,12 @@ class Game():
     equipments = { 0: [ Equipment("potion","!"), Equipment("gold","o") ],
                   1: [ Equipment("sword"), Equipment("bow") ],
                   2: [ Equipment("chainmail") ] }
-    monsters = { 0: [ crt.Creature("Goblin",4), crt.Creature("Bat",2,"W") ],
-                1: [ crt.Creature("Ork",6,strength=2), crt.Creature("Blob",10) ],
-                5: [ crt.Creature("Dragon",20,strength=3) ] }
+    monsters = { 0: [ Creature("Goblin",4), Creature("Bat",2,"W") ],
+                1: [ Creature("Ork",6,strength=2), Creature("Blob",10) ],
+                5: [ Creature("Dragon",20,strength=3) ] }
 
     def __init__(self, hero=None, level=1):
-        self._hero = hero if hero else hr.Hero()
+        self._hero = hero if hero else Hero()
         self._level = level
         self._floor = None
         self._messages = []

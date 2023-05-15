@@ -2,7 +2,6 @@
 import random #can stay
 from .coord import Coord #can stay
 from . import the_game
-from . import map as mp
 
 class Room():
     '''A room in the dungeon.'''

@@ -3,7 +3,7 @@ import random
 
 from .utils import getch
 from .coord import Coord
-from . import hero as hr
+from .hero import Hero
 from .room import Room
 from .element import Element
 
@@ -20,7 +20,7 @@ class Map():
         self._mat = [[Map.empty for _ in range(size)] for _ in range(size)]
         # used to initialize the map with ground cells
 
-        self._hero = hero if hero else hr.Hero()
+        self._hero = hero if hero else Hero()
         self._elem = {} # used to store the elements of the map and their positions
         self._roomsToReach = []
         self._rooms = []
