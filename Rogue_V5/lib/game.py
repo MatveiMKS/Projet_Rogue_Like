@@ -7,6 +7,7 @@ from . import hero as hr
 from . import map as mp
 from . import creature as crt
 from .equipment import Equipment
+from .stairs import Stairs
 
 
 class Game():
@@ -28,6 +29,7 @@ class Game():
     def buildFloor(self):
         '''Builds a new floor.'''
         self._floor = mp.Map()
+        self._floor.put(self._floor._rooms[-1].center(), Stairs())
 
     def addMessage(self, message):
         '''Adds a message to the message list.'''

@@ -26,7 +26,7 @@ class Coord():
     def distance(self, other):
         '''Returns the distance between self and other.'''
         return math.sqrt((self.x - other.x)^2 + (self.y - other.y)^2)
-    
+
     def direction(self, other):
         '''Returns the direction from self to other.'''
         diff = other - self
