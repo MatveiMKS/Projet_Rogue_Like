@@ -26,3 +26,16 @@ class Coord():
     def distance(self, other):
         '''Returns the distance between self and other.'''
         return math.sqrt((self.x - other.x)^2 + (self.y - other.y)^2)
+    
+    def direction(self, other):
+        '''Returns the direction from self to other.'''
+        diff = other - self
+        rapport = diff.x / abs(diff)
+        if rapport > 1/math.sqrt(2):
+            return Coord(-1,0)
+        elif rapport < -1/math.sqrt(2):
+            return Coord(1,0)
+        elif diff.y > 0:
+            return Coord(0,-1)
+        else:
+            return Coord(0,1)
