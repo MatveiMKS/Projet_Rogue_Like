@@ -6,6 +6,7 @@ from .coord import Coord
 from . import hero as hr
 from .room import Room
 from .element import Element
+from .creature import Creature
 
 class Map():
     '''Used to represent a map.'''
@@ -107,20 +108,17 @@ class Map():
                     del self._elem[key]
                     break
 
-    def move(self, element, way):
-        '''Moves element in the direction way.'''
-        if element in self._elem:
-            if self.pos(element)+way in self and self.get(self.pos(element) +way) == Map.ground:
-                # if the cell is empty
-                pos_ini = self.pos(element)
-                self.rm(pos_ini)
-                self.put(pos_ini+way, element)
-            elif (self.pos(element)+way) in self and self.get(self.pos(element) +way) != Map.empty:
-                # if the cell is not empty
-                met_element = self.get(self.pos(element) +way)
-                if met_element.meet(element):
-                    pos_ini = self.pos(element)
-                    self.rm(pos_ini + way)
+    def move(self, e, way):
+        """Moves the element e in the direction way."""
+        orig = self.pos(e)
+        dest = orig + way
+        if dest in self:
+            if self.get(dest) == Map.ground:
+                self._mat[orig.y][orig.x] = Map.ground
+                self._mat[dest.y][dest.x] = e
+                self._elem[e] = dest
+            elif self.get(dest) != Map.empty and self.get(dest).meet(e) and self.get(dest) != self._hero:
+                self.rm(dest)
 
 
     def __getitem__(self, key):
@@ -216,6 +214,13 @@ class Map():
             salle = self.randRoom()
             if self.intersectNone(salle):
                 self.addRoom(salle)
+
+    def moveAllMonsters(self):
+        '''Moves all the monsters in the map.'''
+        for element in self._elem:
+            if isinstance(element, Creature and element != self._hero):
+                if element.pos().distance(self._hero.pos()) < 6: 
+                    self.move(element, )
 
     def play(self):
         '''Plays the game.'''
