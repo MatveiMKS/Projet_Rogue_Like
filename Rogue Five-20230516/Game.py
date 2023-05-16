@@ -7,7 +7,7 @@ from Hero import Hero
 from Map import Map
 from Stairs import Stairs
 from handler import heal, teleport, throw
-from utils import getch2
+from utils import getch2, _find_getch
 import theGame
 
 class Game(object):
@@ -81,7 +81,7 @@ class Game(object):
 
     def select(self, l):
         print("Choose item> " + str([str(l.index(e)) + ": " + e.name for e in l]))
-        c = _find_getch()
+        c = getch2()
         if c.isdigit() and int(c) in range(len(l)):
             return l[int(c)]
 
