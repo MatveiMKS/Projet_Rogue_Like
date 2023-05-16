@@ -1,3 +1,5 @@
+import random, copy
+
 from Equipment import Equipment
 from Creature import Creature
 from Coord import Coord
@@ -5,10 +7,8 @@ from Hero import Hero
 from Map import Map
 from Stairs import Stairs
 from handler import heal, teleport, throw
-from utils import _find_getch
+from utils import getch2
 import theGame
-
-import random, copy
 
 class Game(object):
     """ Class representing game state """
@@ -25,7 +25,7 @@ class Game(object):
                 1: [Creature("Ork", 6, strength=2), Creature("Blob", 10)], 5: [Creature("Dragon", 20, strength=3)]}
 
     """ available actions """
-    _actions = {'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)), \
+    _actions = { 'z': lambda h: theGame.theGame()._floor.move(h, Coord(0, -1)), \
                 'q': lambda h: theGame.theGame()._floor.move(h, Coord(-1, 0)), \
                 's': lambda h: theGame.theGame()._floor.move(h, Coord(0, 1)), \
                 'd': lambda h: theGame.theGame()._floor.move(h, Coord(1, 0)), \
@@ -94,7 +94,8 @@ class Game(object):
             print(self._floor)
             print(self._hero.description())
             print(self.readMessages())
-            c = _find_getch()
+            c = getch2()
+            print(c in Game._actions)
             if c in Game._actions:
                 Game._actions[c](self._hero)
             self._floor.moveAllMonsters()
