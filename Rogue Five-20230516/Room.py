@@ -28,8 +28,10 @@ class Room(object):
         return Coord((self.c1.x + self.c2.x) // 2, (self.c1.y + self.c2.y) // 2)
 
     def randCoord(self):
-        """A random coordinate inside the room"""
-        return Coord(random.randint(self.c1.x, self.c2.x), random.randint(self.c1.y, self.c2.y))
+        '''Returns a random position in the room.'''
+        pos_x = random.randint(min(self.c1.x, self.c2.x), max(self.c1.x, self.c2.x))
+        pos_y = random.randint(min(self.c1.y, self.c2.y), max(self.c1.y, self.c2.y))
+        return Coord(pos_x, pos_y)
 
     def randEmptyCoord(self, map):
         """A random coordinate inside the room which is free on the map."""
