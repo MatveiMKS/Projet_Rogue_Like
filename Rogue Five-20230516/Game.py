@@ -14,11 +14,11 @@ class Game(object):
     """ Class representing game state """
 
     """ available equipments """
-    equipments = {0: [Equipment("potion", "!", usage=lambda self, hero: heal(hero)), \
-                      Equipment("gold", "o")], \
-                  1: [Equipment("potion", "!", usage=lambda self, hero: teleport(hero, True))], \
-                  2: [Equipment("bow", usage=lambda self, hero: throw(1, True))], \
-                  3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, False))], \
+    equipments = {0: [Equipment("potion", "!", usage=lambda self, hero: heal(hero))],
+                  1 : [Equipment("gold", "o")],
+                  #1: [Equipment("potion", "!", usage=lambda self, hero: teleport(hero, True))],
+                  2: [Equipment("bow", usage=lambda self, hero: throw(1, True))],
+                  3: [Equipment("portoloin", "w", usage=lambda self, hero: teleport(hero, False))]
                   }
     """ available monsters """
     monsters = {0: [Creature("Goblin", 4), Creature("Bat", 2, "W")],
